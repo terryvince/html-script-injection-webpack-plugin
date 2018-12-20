@@ -20,7 +20,7 @@ npm i html-script-injection-webpack-plugin -D
     <script type="text/javascript">
         // some code
     </script>
-    <!-- All of script tag will be auto injected, include jquery, inline script, script of htmlWebpackPlugin -->
+    <!-- All of script tag will be auto injected, include jquery, inline script, script of htmlWebpackPlugin production -->
     <!--script-->
     
     <!--script end-->

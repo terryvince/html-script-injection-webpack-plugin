@@ -11,10 +11,10 @@
     "htmlWebpack",
     "injection"
   ],
-  "homepage": "https://github.com/terryvince/html-webpack-hack-plugin",
+  "homepage": "https://github.com/terryvince/html-script-injection-webpack-plugin",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terryvince/html-webpack-hack-plugin.git"
+    "url": "git+https://github.com/terryvince/html-script-injection-webpack-plugin.git"
   },
   "license": "MIT"
 }

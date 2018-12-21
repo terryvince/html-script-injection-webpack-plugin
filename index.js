@@ -23,11 +23,6 @@ class HtmlScriptInjection {
                     inlineScripts += '</body>';
                     let html = data.html.replace(/<[\s]*\/body[\s]*>/,inlineScripts);
                     let isExistInjectPoint = injectRule.test(data.html);
-                    if(!isInject){
-                        data.html = html;
-                        cb();
-                        return;
-                    }
                     if(isInject && isExistInjectPoint){
                         let allScripts = html.match(scriptRule)[0];
                         html = html.replace(scriptRule,'');

@@ -5,13 +5,13 @@ class HtmlScriptInjection {
     apply(compiler){
         let isInject = !!this.options.injectPoint;
         compiler.hooks.compilation.tap('HtmlScriptInjection', (compilation)=> {
-            let inlineScripts;
+            let inlineScripts = '';
             let scriptRule = /(<[\s]*script)[\w,\W]*(<[\s]*\/script[\s]*>)/g;
             let injectRule = /(<!--[\s]*script[\s]*-->)[\w,\W]*(<!--[\s]*script[\s]end[\s]*-->)/g;
             compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
                 'HtmlScriptInjection',
                 (data, cb) => {
-                    inlineScripts = data.html.match(scriptRule)[0];
+                    inlineScripts = data.html.match(scriptRule) ? data.html.match(scriptRule)[0]: '';
                     data.html = data.html.replace(scriptRule,'');
                     cb();
                 }

@@ -6,12 +6,12 @@ class HtmlScriptInjection {
         let isInject = !!this.options.injectPoint;
         compiler.hooks.compilation.tap('HtmlScriptInjection', (compilation)=> {
             let inlineScripts = '';
-            let scriptRule = /(<[\s]*script)[\w,\W]*(<[\s]*\/script[\s]*>)/g;
+            let scriptRule = /(<script\b[^>]*>([\s\S]*?)<\/script>)/g;
             let injectRule = /(<!--[\s]*script[\s]*-->)[\w,\W]*(<!--[\s]*script[\s]end[\s]*-->)/g;
             compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
                 'HtmlScriptInjection',
                 (data, cb) => {
-                    inlineScripts = data.html.match(scriptRule) ? data.html.match(scriptRule)[0]: '';
+                    inlineScripts = data.html.match(scriptRule) ? data.html.match(scriptRule).join(''): '';
                     data.html = data.html.replace(scriptRule,'');
                     cb();
                 }
@@ -24,7 +24,7 @@ class HtmlScriptInjection {
                     let html = data.html.replace(/<[\s]*\/body[\s]*>/,inlineScripts);
                     let isExistInjectPoint = injectRule.test(data.html);
                     if(isInject && isExistInjectPoint){
-                        let allScripts = html.match(scriptRule)[0];
+                        let allScripts = html.match(scriptRule).join('');
                         html = html.replace(scriptRule,'');
                         data.html = html.replace(injectRule, allScripts);
                     } else {
